@@ -9,7 +9,7 @@ mongoose.connect(DB_URL, {
 }).then(() => {
     console.log('connect')
 }).catch(error => {
-    console.log(error)
+    console.log(error?.message)
 })
 
 // recent Work 
