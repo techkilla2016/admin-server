@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors(
     {
-        origin: ['https://admin-server-topaz.vercel.app/', 'http://localhost:2917/']
+        origin: ['https://admin-server-topaz.vercel.app/', 'http://localhost:2917/', 'https://admin-25de.onrender.com/']
     }
 ))
 app.use('/', express.static(path.join(__dirname, 'public/')))
