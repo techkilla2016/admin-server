@@ -1,6 +1,11 @@
 const { unlinkSync } = require('fs')
 const path = require('path')
 const { recentWorkModel } = require('../')
+function convertToSlug(string) {
+    var charactersToRemove = /[/!@#$%^&*()?.,\s]/g;
+    var cleanedString = string.replace(charactersToRemove, "");
+    return cleanedString.slice(0, 10);
+}
 async function updateWork(req, res) {
     try {
         if (req.files) {
@@ -25,14 +30,14 @@ async function updateWork(req, res) {
 
 
             if (thumbnail) {
-                thumbnail_file_name = req?.body?.heading.split(' ').join('-')
+                thumbnail_file_name = convertToSlug(req?.body?.heading)
                 thumbnail_filename = `${thumbnail_file_name}-thumbnail-${new Date().getTime()}${path.extname(thumbnail?.name)}`
                 thumbnail_saveFile = path.join(rootDir, `public/work/${thumbnail_filename}`);
                 thumbnail_image = `/work/${thumbnail_filename}`;
             }
 
             if (logo) {
-                logo_file_name = req?.body?.heading.split(' ').join('-')
+                logo_file_name = convertToSlug(req?.body?.heading)
                 logo_filename = `${logo_file_name}-logo-${new Date().getTime()}${path.extname(logo?.name)}`
                 logo_saveFile = path.join(rootDir, `public/work/${logo_filename}`);
                 logo_image = `/work/${logo_filename}`;

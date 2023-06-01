@@ -1,13 +1,9 @@
 const path = require('path')
 const { caseStudieModel } = require('../')
 function convertToSlug(string) {
-    // Remove symbols and convert to lowercase
-    var slug = string.replace(/[^\w\s]+/g, '').toLowerCase();
-
-    // Replace spaces with hyphens
-    slug = slug.replace(/\s+/g, '-');
-
-    return slug;
+    var charactersToRemove = /[/!@#$%^&*()?.,\s]/g;
+    var cleanedString = string.replace(charactersToRemove, "");
+    return cleanedString.slice(0, 10);
 }
 async function insertData(req, res) {
     try {
